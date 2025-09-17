@@ -1,5 +1,7 @@
 package zoho1;
 import java.util.*;
+import java.util.LinkedList;
+//Adjacency list
 public class Bfs {
 
 	public static void main(String[] args) {
@@ -12,8 +14,9 @@ public class Bfs {
 		g.addEdge(4,1);
 		g.addEdge(2,1);
 		g.adjList();
+		g.breadth(0);
+		g.dfs(0);
 	}
-
 }
 class Graph{
 	ArrayList<ArrayList<Integer>> adjList=new ArrayList<>();
@@ -37,4 +40,52 @@ class Graph{
 		System.out.println();
 	}
 }
+	//bfs
+	public void breadth(int v) {
+		int s=adjList.size();
+		boolean[] visit=new boolean[s];
+		visit[v]=true;
+		
+		Queue<Integer> q=new LinkedList<>();
+		q.add(v);
+		System.out.print("BFS:");
+		while(q.size()!=0) {
+			int vertex=q.remove();
+		System.out.print(vertex+" ");
+		for(int i=-0; i<adjList.get(vertex).size();i++) {
+			int av=adjList.get(vertex).get(i);
+			if(!visit[av])
+				q.add(av);
+			visit[av]=true;
+		}
+		}
+		System.out.println();
+	}
+	
+	//dfs
+	
+	public void dfs(int start) {
+		int s=adjList.size();
+	    boolean[] visit = new boolean[s];
+	    Stack<Integer> stack = new Stack<>();
+
+	    stack.push(start);
+	    System.out.print("DFS:");
+	    while (!stack.isEmpty()) {
+	        int v = stack.pop();
+
+	        if (!visit[v]) {
+	            visit[v] = true;
+	            System.out.print(v + " ");
+	            for (int i = adjList.get(v).size() - 1; i >= 0; i--) {
+	                int av = adjList.get(v).get(i);
+	                if (!visit[av]) {
+	                    stack.push(av);
+	                }
+	            }
+	        }
+	    }
+	}
+
 }
+
