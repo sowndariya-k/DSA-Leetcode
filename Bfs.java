@@ -64,7 +64,7 @@ class Graph{
 	
 	//dfs
 	
-	public void dfs(int start) {
+	/*public void dfs(int start) {
 		int s=adjList.size();
 	    boolean[] visit = new boolean[s];
 	    Stack<Integer> stack = new Stack<>();
@@ -85,6 +85,23 @@ class Graph{
 	            }
 	        }
 	    }
+	}*/
+	
+	public void dfs(int v) {
+		int s=adjList.size();
+		boolean[] visit=new boolean[s];
+		System.out.print("DFS:");
+		dfs2(v,visit);
+	}
+	public void dfs2(int v, boolean[] visit) {//boolean visit change every time
+		visit[v]=true;
+		System.out.print(v+" ");
+		for(int i=0; i<adjList.get(v).size();i++) {
+			int av=adjList.get(v).get(i);
+			if(!visit[av]) {
+				dfs2(av,visit);
+			}
+		}
 	}
 
 }
